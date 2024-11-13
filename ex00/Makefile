@@ -6,7 +6,7 @@ CPP:= c++
 CPP_FLAGS := -Wall -Wextra -Werror -std=c++98
 
 #Sources
-SRC:= main.cpp ScalarConverter.cpp
+SRC:= main.cpp ScalarConverter.cpp printHelp.cpp
 
 #Objects
 OBJ:= $(SRC:.cpp=.o)
@@ -26,7 +26,7 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(OBJ)
+	rm -f $(NAME)
 
 re: fclean all
 
