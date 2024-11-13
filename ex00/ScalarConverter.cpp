@@ -47,7 +47,7 @@ bool stringToChar(const std::string &_value, char &_char, int &_int) {
 
   if (_value.size() == 1) {
     _char = _value[0];
-    _int = (int)_value[0];
+    _int = static_cast<int>(_value[0]);
     return (true);
   }
   if (_value.size() == 2) {
@@ -135,10 +135,12 @@ void ScalarConverter::convert(const std::string &_value) {
   float _float;
   double _double;
 
-  if (stringToInt(_value, _int, _double, _float, _char)) {
+  if (_value == "nanf" || _value == "-inf" || _value == "+inf" ||
+      _value == "nan")
+    specialCases(_value);
+  else if (stringToInt(_value, _int, _double, _float, _char)) {
     stringToIntPrint(_char, _int, _double, _float);
-  }
-  else if (stringToChar(_value, _char, _int)) {
+  } else if (stringToChar(_value, _char, _int)) {
     stringToCharPrint(_int, _float, _double, _char);
   } else if (stringToFloat(_value, _float, _double, _int, _char)) {
     stringToFloatPrint(_value, _int, _float, _double, _char);

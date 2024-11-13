@@ -13,7 +13,6 @@
 #define CYAN "\033[36m"
 #define WHITE "\033[37m"
 
-
 #define CHAR(c) ("char   : " + std::string(1, c))
 #define NCHAR "char   : Non printable"
 #define ICON "char   : Impossible conversion"
@@ -37,6 +36,7 @@ private:
 public:
   static void convert(const std::string &_value);
 };
+void specialCases(std::string const &_value);
 void defaultCase();
 void stringToDoublePrint(int _int, float _float, double _double, char _char);
 void stringToFloatPrint(std::string _value, int _int, char _char,

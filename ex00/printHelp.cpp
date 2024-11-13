@@ -1,10 +1,24 @@
 #include "ScalarConverter.hpp"
 
 void defaultCase() {
-  std::cout << ICON << std::endl;
-  std::cout << ICONI << std::endl;
-  std::cout << ICONF << std::endl;
-  std::cout << ICOND << std::endl;
+  std::cout << RED << ICON << RESET << std::endl;
+  std::cout << RED << ICONI << RESET << std::endl;
+  std::cout << RED << ICONF << RESET << std::endl;
+  std::cout << RED << ICOND << RESET << std::endl;
+}
+
+void specialCases(std::string const &_value) {
+  if (_value == "nanf" || _value == "nan") {
+    std::cout << RED << ICON << std::endl;
+    std::cout << RED << ICONI << std::endl;
+    std::cout << YELLOW << FLOAT << "nanf" << std::endl;
+    std::cout << BLUE << DOUBLE << "nan" << std::endl;
+  } else if (_value == "+inf" || _value == "-inf") {
+    std::cout << RED << ICON << std::endl;
+    std::cout << RED << ICONI << std::endl;
+    std::cout << YELLOW << FLOAT << _value[0] << "inf" << std::endl;
+    std::cout << BLUE << DOUBLE << _value[0] << "inf" << std::endl;
+  }
 }
 
 void stringToIntPrint(char _char, int _int, double _double, float _float) {
@@ -27,8 +41,8 @@ void stringToCharPrint(int _int, float _float, double _double, char _char) {
   std::cout << INT << _int << std::endl;
   _float = static_cast<float>(_int);
   _double = static_cast<double>(_int);
-  std::cout << YELLOW << FLOAT << _float << ".0f" << std::endl;
-  std::cout << BLUE << DOUBLE << _double << ".0" << std::endl;
+  std::cout << YELLOW << FLOAT << _float << "f" << std::endl;
+  std::cout << BLUE << DOUBLE << _double << std::endl;
 }
 
 void stringToDoublePrint(int _int, float _float, double _double, char _char) {
