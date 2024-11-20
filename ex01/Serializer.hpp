@@ -12,11 +12,22 @@
 // to deserialize(). Then, ensure the return value of deserialize() compares
 // equal to the original pointer. Do not forget to turn in the files of your
 // Data structure
-#include <cstdint>
+#include <iostream>
+#include <stdint.h>
+
+typedef struct {
+  int data;
+} Data;
 class Serializer {
 private:
+  Serializer();
+  ~Serializer();
+  Serializer(const Serializer &_other);
 public:
+
+  Serializer &operator=(const Serializer &rhs);
   static uintptr_t serialize(Data *ptr);
-}
+  static Data *deserialize(uintptr_t raw);
+};
 
 #endif
