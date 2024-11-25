@@ -5,6 +5,7 @@
 #include <ctime>
 #include <string>
 #include <unistd.h>
+#include <typeinfo>
 
 Base *generate(void)
 {
@@ -39,7 +40,27 @@ void identify(Base *p)
         std::cout << MAGENTA << "Result : C" << RESET << std::endl;
     }
 }
-
+void identify(Base &p)
+{
+    try{
+        (void) dynamic_cast<A &>(p);
+        std::cout << YELLOW << "Result : A" << RESET << std::endl;
+    }catch(const std::bad_cast&)
+    {
+    }
+    try{
+        (void) dynamic_cast<B &>(p);
+        std::cout << RED << "Result : B" << RESET << std::endl;
+    }catch(const std::bad_cast&)
+    {
+    }
+    try{
+       (void)  dynamic_cast<C &>(p);
+        std::cout << MAGENTA << "Result : C" << RESET << std::endl;
+    }catch(const std::bad_cast&)
+    {
+    }
+}
 int main()
 {
     A a;
@@ -66,9 +87,13 @@ int main()
         {
             identify(&c);
         }
-        std::cout << GREEN << "___________The random object is :__________\n"
+        std::cout << GREEN << "___________The random object Pointer :__________\n"
                   << RESET << std::endl;
         identify(base);
+
+        std::cout << GREEN << "___________The random object Reference :__________\n" << RESET << std::endl;
+        identify(*base);
+
         delete (base);
     }
     return 0;
