@@ -30,6 +30,8 @@ int main()
     }
     else {
         std::cout << RED << "Error data are not the same is different" << std::endl;
+        std::cout << YELLOW << "Data: Original  : " << &data << std::endl;
+        std::cout << BLUE   << "Data Serialized : " << deserialized1 << RESET << std::endl;
     }
     return 1;
 }
