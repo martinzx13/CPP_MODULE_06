@@ -55,7 +55,7 @@ void stringToCharPrint(int _int, float _float, double _double, char _char) {
   std::cout << INT << _int << std::endl;
   _float = static_cast<float>(_int);
   _double = static_cast<double>(_int);
-  std::cout << YELLOW << FLOAT << _float << "f" << std::endl;
+  std::cout << YELLOW << FLOAT << _float << ".0f" << std::endl;
   std::cout << BLUE << DOUBLE << _double << std::endl;
 }
 
