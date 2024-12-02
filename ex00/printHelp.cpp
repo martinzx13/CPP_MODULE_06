@@ -1,10 +1,24 @@
 #include "ScalarConverter.hpp"
+#include <iostream>
+#include <sstream>
+#include <string>
 
 void defaultCase() {
   std::cout << RED << ICON << RESET << std::endl;
   std::cout << RED << ICONI << RESET << std::endl;
   std::cout << RED << ICONF << RESET << std::endl;
   std::cout << RED << ICOND << RESET << std::endl;
+}
+
+bool hasZeroAfterDecimal(float value) {
+  std::ostringstream oss;
+  oss << value;
+  std::string valueStr = oss.str();
+  size_t decimalPointPos = valueStr.find('.');
+  if (decimalPointPos != std::string::npos) {
+    return true;
+  }
+  return false;
 }
 
 void specialCases(std::string const &_value) {
@@ -53,7 +67,9 @@ void stringToDoublePrint(int _int, float _float, double _double, char _char) {
   else
     std::cout << GREEN << CHAR(_char) << RESET << std::endl;
   std::cout << RED << INT << RESET << _int << std::endl;
-  std::cout << YELLOW << FLOAT << RESET << _float << "f" << std::endl;
+  hasZeroAfterDecimal(_float)
+      ? std::cout << YELLOW << FLOAT << RESET << _float << "f" << std::endl
+      : std::cout << YELLOW << FLOAT << RESET << _float << ".0f" << std::endl;
   std::cout << BLUE << DOUBLE << RESET << _double << std::endl;
 }
 

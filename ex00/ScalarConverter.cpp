@@ -1,6 +1,7 @@
 #include "ScalarConverter.hpp"
 #include <algorithm>
 #include <cctype>
+#include <cstddef>
 #include <exception>
 #include <iomanip>
 #include <iostream>
@@ -22,7 +23,7 @@ ScalarConverter::~ScalarConverter() {}
 bool stringToInt(const std::string &_value, int &_int, double &_double,
                  float &_float, char &_char) {
   bool longint = false;
-
+  std::cout << "_____________ TEST : " << _value << std::endl;
   std::stringstream oss(_value);
   long long temp;
   oss >> temp;
@@ -112,20 +113,21 @@ bool stringToFloat(const std::string &_value, float &_float, double &_double,
 
 bool stringToDouble(const std::string &_value, double &_double, float &_float,
                     int &_int, char &_char) {
-
   std::stringstream oss(_value);
-
-  if ((_value.size() - 1) == _value.find('.'))
+  size_t decimalPoint = _value.find('.');
+  if ((_value.size() - 1) == decimalPoint)
     return false;
   oss >> _double;
-
   if (oss.fail() || !oss.eof())
     return (false);
-
-  _float = _double;
-  _int = _double;
-  if (_int >= 0 && _int <= 127)
-    _char = static_cast<char>(_int);
+  
+  if (decimalPoint != std::string::npos && _value[decimalPoint + 1] == '0' && !_value[decimalPoint + 2]) {
+    _int = _double;
+    if (_int >= 0 && _int <= 127)
+      _char = static_cast<char>(_int);
+  }
+    _int = _double;
+  _float = static_cast<float>(_double);
   return (true);
 }
 void ScalarConverter::convert(const std::string &_value) {
