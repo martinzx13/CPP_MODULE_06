@@ -63,6 +63,7 @@ void identify(Base &p)
 }
 int main()
 {
+    
     A a;
     B b;
     C c;

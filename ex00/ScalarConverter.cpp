@@ -23,7 +23,6 @@ ScalarConverter::~ScalarConverter() {}
 bool stringToInt(const std::string &_value, int &_int, double &_double,
                  float &_float, char &_char) {
   bool longint = false;
-  std::cout << "_____________ TEST : " << _value << std::endl;
   std::stringstream oss(_value);
   long long temp;
   oss >> temp;
